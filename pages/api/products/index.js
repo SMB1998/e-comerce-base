@@ -1,14 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { db, SHOP_CONSTANTS } from '../../../database'
 import { Product } from '../../../models'
 import { IProduct } from '../../../interfaces/products';
 import products from '../fakeDB'
 
-type Data = 
-| { message: string }
-| IProduct[]
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler(req, res) {
 
     switch( req.method ) {
         case 'GET':
@@ -21,7 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 }
 
-const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+const getProducts = async(req, res) => {
     
     const { gender = 'all' } = req.query;
 

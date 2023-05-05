@@ -1,4 +1,4 @@
-import { FC, useReducer, useEffect } from 'react';
+import { FC, useReducer, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
 
@@ -9,6 +9,10 @@ import { AuthContext, authReducer } from './';
 
 import { tesloApi } from '../../api';
 import { IUser } from '../../interfaces';
+
+interface Props {
+    children: ReactNode;
+}
 
 export interface AuthState {
     isLoggedIn: boolean;
@@ -22,8 +26,8 @@ const AUTH_INITIAL_STATE: AuthState = {
 }
 
 
-export const AuthProvider:FC = ({ children }) => {
 
+export const AuthProvider:FC<Props> = ({ children }) => {
     const [state, dispatch] = useReducer( authReducer, AUTH_INITIAL_STATE );
     const { data, status } = useSession();
     const router = useRouter();
