@@ -62,9 +62,9 @@ export default NextAuth({
 
         switch( account.type ) {
 
-          case 'oauth': 
+          /*case 'oauth': 
             token.user = await dbUsers.oAUthToDbUser( user?.email || '', user?.name || '' );
-          break;
+          break;*/
 
           case 'credentials':
             token.user = user;

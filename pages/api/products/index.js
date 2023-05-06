@@ -1,6 +1,4 @@
-import { db, SHOP_CONSTANTS } from '../../../database'
-import { Product } from '../../../models'
-import { IProduct } from '../../../interfaces/products';
+
 import products from '../fakeDB'
 
 

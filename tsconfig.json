@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/[...nextauth].js", "pages/api/products/index.js", "pages/orders/history.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/auth/[...nextauth].js", "pages/api/products/index.js", "pages/orders/history.jsx", "database/dbProducts.js", "pages/api/products/[slug].js", "pages/api/search/[q].js", "pages/api/user/register.js", "pages/api/user/validate-token.js", "pages/product/[slug].jsx"],
   "exclude": ["node_modules"]
 }

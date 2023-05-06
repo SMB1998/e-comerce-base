@@ -1,22 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
 
-import { db } from '../../../database';
-import { User } from '../../../models';
 import { jwt, validations } from '../../../utils';
 
-type Data = 
-| { message: string }
-| {
-    token: string;
-    user: {
-        email: string;
-        name: string;
-        role: string;
-    }
-}
-
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler(req, res) {
     
     switch( req.method ) {
         case 'POST':
@@ -29,9 +15,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 }
 
-const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+const registerUser = async(req, res) => {
     
-    const { email = '', password = '', name = '' } = req.body as { email: string, password: string, name: string };
+    const { email = '', password = '', name = '' } = req.body;
 
     if ( password.length < 6 ) {
         return res.status(400).json({
@@ -52,16 +38,8 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
     
     
-    await db.connect();
-    const user = await User.findOne({ email });
 
-    if ( user ) {
-        return res.status(400).json({
-            message:'No puede usar ese correo'
-        })
-    }
-
-    const newUser = new User({
+    const newUser = ({
         email: email.toLocaleLowerCase(),
         password: bcrypt.hashSync( password ),
         role: 'client',
